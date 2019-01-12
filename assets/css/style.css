@@ -20,7 +20,7 @@ h1 {
 
 h2 {
     text-align:center;
-    color: rgb(214, 172, 66);
+    color: white;
     text-decoration: underline;
     font-size: 6vh;
 }
@@ -94,4 +94,8 @@ div {
 #score,
 #missed {
     text-align: left;
+}
+
+img {
+    display: none;
 }

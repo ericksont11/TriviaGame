@@ -1,22 +1,21 @@
 $(document).ready(function() {
 
-
-    var quizGame = {
-        questionArray: ["Where was I born?", "What's my favourite color?", "What do I love most?", "What's my favourite book?", "What's my favourite TV show?"],
-        questionChoices : [
-            ["Chicago","Indianapolis", "Fishers", "Cincinnati"],
-            ["Teal", "Goldenrod", "Forest Green", "Magenta"],
-            ["Nothing", "Ignoring Kelsey", "Coding", "Kelsey Dale"],
-            ["Cosmos", "The Remains of the Day", "The Brief and Wondrous Life of Oscar Wao", "The Sun also Rises"],
-            ["Psych", "Scrubs", "The Wire", "The West Wing"]
-        ],
-        questionAnswers : ["Chicago", "Teal", "Kelsey Dale", "Cosmos", "The West Wing"]
-        
-    };
+var quizGame = {
+    questionArray: ["Where was I born?", "What's my favourite color?", "What do I love most?", "What's my favourite book?", "What's my favourite TV show?", "What's my favorite food", "Why did I move to Raleigh?"],
+    questionChoices : [
+        ["Chicago","Indianapolis", "Fishers", "Cincinnati"],
+        ["Teal", "Goldenrod", "Forest Green", "Magenta"],
+        ["Nothing", "Ignoring Kelsey", "Coding", "Kelsey Dale"],
+        ["Cosmos", "The Remains of the Day", "The Brief and Wondrous Life of Oscar Wao", "The Sun also Rises"],
+        ["Psych", "Scrubs", "The Wire", "The West Wing"],
+        ["Chili Spaghetti", "Steak", "Baked Potato", "Cheese"],
+        ["The Weather", "Kelsey made me", "Great question...", "FOR LOVE"]
+    ],
+    questionAnswers : ["Chicago", "Teal", "Kelsey Dale", "Cosmos", "The West Wing", "Chili Spaghetti", "FOR LOVE"]   
+};
 
 var questionsRemaining = [];
 var answer;
-var running = false;
 var count = 0;
 var time = 10;
 var intervalID;
@@ -26,14 +25,8 @@ var answerChosen = false;
 var score = 0;
 var missed = 0;
 var highscore = 0;
-var record;
 var i;
-
-for (var b = 0; b < quizGame.questionArray.length; b++) {
-    questionsRemaining.push(b);
-}
-
-console.log(questionsRemaining.length);
+var record;
 
 function pickQuestion () {
     clearTimeout(timeout);
@@ -42,52 +35,55 @@ function pickQuestion () {
     time = 10;
     intervalID = setInterval(timer, 1000);
     answerChosen = false;
-    running = true;
     timeout = setTimeout(showAnswer, 10000)
     i = Math.floor(Math.random() * questionsRemaining.length);
+    console.log(i)
     $("#question").html(quizGame.questionArray[questionsRemaining[i]]) 
     $("#timer").css("backgroundColor", "blue")  
     $("#timer").html(":"+time); 
     for (var a = 0; a < quizGame.questionArray.length; a++) {
-            if ( questionsRemaining[i] === a) { //1
+            if ( questionsRemaining[i] === a) { 
                 for (y = 0; y < 4; y++){
-                    var x = Math.floor(Math.random() * answerChoices.length); //3
-                    record = y;
+                    var x = Math.floor(Math.random() * answerChoices.length);
+                    record = answerChoices[x];
+                    console.log(x)
                     if (answerChoices[x] === 0) { 
                         $("#Answer" + 0).show();
-                        $("#Answer" + 0).html(quizGame.questionChoices[a][0]) //teal y=2
+                        $("#Answer" + 0).html(quizGame.questionChoices[a][y])
                         answerChoices.splice(x, 1);
                     }
                     else if (answerChoices[x] === 1) {
                         $("#Answer" + 1).show();
-                        $("#Answer" + 1).html(quizGame.questionChoices[a][1])  //goldenrod y=0
+                        $("#Answer" + 1).html(quizGame.questionChoices[a][y]) 
                         answerChoices.splice(x, 1);
                     }
                     else if (answerChoices[x] === 2) {
                         $("#Answer" + 2).show();
-                        $("#Answer" + 2).html(quizGame.questionChoices[a][2])  //forest green y=3
+                        $("#Answer" + 2).html(quizGame.questionChoices[a][y])  
                         answerChoices.splice(x, 1); 
                     }
-                    else if (answerChoices[x] === 3) { //3
+                    else if (answerChoices[x] === 3) { 
                         $("#Answer" + 3).show();
-                        $("#Answer" + 3).html(quizGame.questionChoices[a][3])  //magenta y=0
+                        $("#Answer" + 3).html(quizGame.questionChoices[a][y])  
                         answerChoices.splice(x, 1); 
                     }
                     
-                    if (quizGame.questionChoices[i][y] === quizGame.questionAnswers[i]) {
+                    if (quizGame.questionChoices[a][y] === quizGame.questionAnswers[a]) {
                         answer = "Answer" + record; 
                         
                     }
                 }  
+                count++
         }
     }
-    console.log(questionsRemaining.length)
-    count++
+    questionsRemaining.splice(i, 1);
 }
 
 function showAnswer () {
-    questionsRemaining.splice(i, 1);
+    clearTimeout(timeout);
+    clearInterval(intervalID);
     answerChosen = true;
+    console.log(answer)
     if (time === 0) {
         $("#timer").html("Time ran out! The answer is:") 
         $("#timer").css("backgroundColor", "red")
@@ -121,7 +117,6 @@ function showAnswer () {
         clearTimeout(timeout);
         timeout = setTimeout(pickQuestion, 3000)
     }
-
 }
 
 function timer() {
@@ -140,9 +135,11 @@ function scoreboard() {
     $("#Answer1").hide();
     $("#Answer2").hide();
     $("#Answer3").hide();
+    $("#question").hide();
     $("#score").html("Score: "+score);
     $("#missed").html("Missed: "+missed);
     $("#loading").hide();
+    $("#title").show();
     if (score > highscore) {
         $("#loading").show();
         $("#loading").html("A new personal best! Well done!");
@@ -154,12 +151,14 @@ function scoreboard() {
 }
 
 $("#start").on("click", function go () {
+    $("#question").show();
+    $("#title").hide();
     $("#start").hide();
     $("#scoreboard").hide();
     $("#timer").show();
-    questionsRemaining = [0,1,2,3];
-    answer;
-    running = false;
+    for (var b = 0; b < quizGame.questionArray.length; b++) {
+        questionsRemaining.push(b);
+    }
     count = 0;
     time = 10;
     intervalID;
@@ -168,18 +167,14 @@ $("#start").on("click", function go () {
     answerChosen = false;
     score = 0;
     missed = 0;
-    
-    
-    if (running === false) {
-        pickQuestion();
-    }
+    pickQuestion();
     
 });
 
 $(".button").on("click", function userSelection () {
-    clearTimeout(timeout);
-    clearInterval(intervalID);
     if (answerChosen === false) {
+        clearTimeout(timeout);
+        clearInterval(intervalID);
         userAnswer = this.id;
         if (userAnswer == answer) {
             $("#timer").html("Correct! The answer is:")
