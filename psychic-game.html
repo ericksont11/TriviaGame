@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html>
+
+    <head>
+
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tom's Bio</title>
+    
+
+    </head>
+    
+    <body>
+
+        <header class="bordered">
+
+            <div class="container">
+
+                <div class= "tom">
+    
+                    <h1>Tom Erickson</h1>
+        
+                </div>
+
+                <div class="about">
+
+                   <a href="index.html">About</a>
+
+                </div>
+
+                <div class="portfolio-link">
+
+                <a href="portfolio.html">Portfolio</a>
+    
+                </div>
+
+                <div class="contact-link">
+
+                    <a href="contact.html">Contact</a>
+        
+                </div>
+
+            </div>
+
+        </header>  
+
+        <div id="winScreen"></div>
+        <div id="winText">You won!! What else can you guess!?</div>
+
+        <p id="winScreen">You won!! What else can you guess!?</p>
+
+        <button onclick=chooseWord() id="newButton">Generate Word</button>
+        
+        <section id ="game-box">
+    
+            <section id="game-content">
+
+                <h2 class="page-title blackborder" style="color: white">Psychic: Guess the Classic Board Game</h2>
+
+                <p id="Word" class= "blackborder">Pick a word to start!</p>
+                <br><br>
+                <p id="Letter" class= "blackborder"></p>
+                <p id="Guesses" class= "blackborder"></p>
+                <p id="Count" class= "blackborder"></p>
+                <p id="Win" class= "blackborder"></p>
+                <br>
+                <button onclick=chooseWord() id="wordButton">Generate Word</button>
+
+                
+                
+                
+            </section>
+
+        </section>
+    
+        <footer>
+
+            <h3>TomFred's Web Design</h3>
+                
+        </footer>
+
+
+
+
+        <script src="assets/javascript/game.js"></script>
+    
+    
+       
+    </body>
+    
+    </html>
