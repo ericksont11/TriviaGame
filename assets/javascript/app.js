@@ -1,17 +1,17 @@
 $(document).ready(function() {
 
 var quizGame = {
-    questionArray: ["Where was I born?", "What's my favourite color?", "What do I love most?", "What's my favourite book?", "What's my favourite TV show?", "What's my favorite food", "Why did I move to Raleigh?"],
+    questionArray: ["Who was the first human in space?", "What was the first planet discovered with the aide of a telescope?", "What is the closest star to the sun?", "How far is the farthest spacecraft from earth now?", "What spacecraft is the farthest from Earth?", "Who has spent the most total time in space?", "Who's my favorite physicist?"],
     questionChoices : [
-        ["Chicago","Indianapolis", "Fishers", "Cincinnati"],
-        ["Teal", "Goldenrod", "Forest Green", "Magenta"],
-        ["Nothing", "Ignoring Kelsey", "Coding", "Kelsey Dale"],
-        ["Cosmos", "The Remains of the Day", "The Brief and Wondrous Life of Oscar Wao", "The Sun also Rises"],
-        ["Psych", "Scrubs", "The Wire", "The West Wing"],
-        ["Chili Spaghetti", "Steak", "Baked Potato", "Cheese"],
-        ["The Weather", "Kelsey made me", "Great question...", "FOR LOVE"]
+        ["Yuri Gagarin","Scott Kelly", "Alan Shepard", "Laika"],
+        ["Mars", "Neptune", "Saturn", "Uranus"],
+        ["Sirius", "Alpha Centari", "Barnard's Star", "Procyon"],
+        ["130 million miles", "13 million miles", "1.3 billion miles", "13 billion miles"],
+        ["Voyager 1", "Voyager 2", "Gemini 1", "Gemini 2"],
+        ["Peggy Whitson", "Gennady Padalka", "John Glenn", "Harry Stamper"],
+        ["Carl Sagan", "Richard Feynman", "Angela Merkel", "Ernest Moniz"]
     ],
-    questionAnswers : ["Chicago", "Teal", "Kelsey Dale", "Cosmos", "The West Wing", "Chili Spaghetti", "FOR LOVE"]   
+    questionAnswers : ["Yuri Gagarin", "Uranus", "Alpha Centari", "13 billion miles", "Voyager 1", "Gennady Padalka", "Carl Sagan"]   
 };
 
 var questionsRemaining = [];
@@ -110,12 +110,12 @@ function showAnswer () {
         $("#Answer2").hide();
     }
     if (count === quizGame.questionArray.length) {
-        timeout = setTimeout(scoreboard, 3000)
+        timeout = setTimeout(scoreboard, 1000)
     }
     else {
         clearInterval(intervalID);
         clearTimeout(timeout);
-        timeout = setTimeout(pickQuestion, 3000)
+        timeout = setTimeout(pickQuestion, 1000)
     }
 }
 
@@ -147,6 +147,31 @@ function scoreboard() {
         $("#highScore").html("High Score: "+score);
         highscore = score;
     }
+    if (score === 0) {
+        $("#picture").attr("src","assets/images/person.jpg");
+    }
+    if (score === 1) {
+        $("#picture").attr("src","assets/images/moon.jpg");
+    }
+    if (score === 2) {
+        $("#picture").attr("src","assets/images/planet.jpg");
+    }
+    if (score === 3) {
+        $("#picture").attr("src","assets/images/sun.jpg");
+    }
+    if (score === 4) {
+        $("#picture").attr("src","assets/images/solar-system.jpg");
+    }
+    if (score === 5) {
+        $("#picture").attr("src","assets/images/galaxy.jpg");
+    }
+    if (score === 6) {
+        $("#picture").attr("src","assets/images/cluster.jpg");
+    }
+    if (score === 7) {
+        $("#picture").attr("src","assets/images/universe.jpg");
+    }
+    $("#picture").show()
     
 }
 
