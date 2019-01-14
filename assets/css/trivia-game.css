@@ -88,7 +88,7 @@ div {
     clear: both;
     width: 20vw;
     height: 25vh;
-    margin-left: 15vw;
+    margin-left: 18vw;
     margin-right: 2vw;
 }
 
@@ -100,4 +100,5 @@ div {
 
 img {
     display: none;
+    border: .25vw solid rgb(158, 120, 23)
 }

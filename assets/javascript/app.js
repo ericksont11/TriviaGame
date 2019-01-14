@@ -110,12 +110,12 @@ function showAnswer () {
         $("#Answer2").hide();
     }
     if (count === quizGame.questionArray.length) {
-        timeout = setTimeout(scoreboard, 1000)
+        timeout = setTimeout(scoreboard, 3000)
     }
     else {
         clearInterval(intervalID);
         clearTimeout(timeout);
-        timeout = setTimeout(pickQuestion, 1000)
+        timeout = setTimeout(pickQuestion, 3000)
     }
 }
 
